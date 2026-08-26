@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세페이지 레이아웃 - 카톡 배너 완벽 수정 & 브랜드 소개 효과 버전</title>
+    <!-- 구글 웹 폰트 Noto Sans KR 불러오기 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+@font-face {
+    font-family: 'InkLiquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+        /* 부드러운 스크롤 이동을 위한 설정 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 기본 여백 제거 및 Noto Sans KR 폰트 전면 적용 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fff;
+            color: #333333;
+        }
+
+        /* --- 전체 1000px 중앙 정렬 래퍼 --- */
+        .page-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #f8f9fa; /* 가이드 영역 배경색 */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- [애니메이션 효과 추가] 브랜드 철학/소개 영역 --- */
+        .brand-philosophy-section {
+            
+            /* 기존 단색 배경에서 은은하게 움직이는 그라데이션 배경으로 변경 */
+            background: linear-gradient(-45deg, #1a1a1a, #2d2d2d, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        /* 배경 애니메이션 키프레임 */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 텍스트 스르륵 나타나는 애니메이션 키프레임 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand-philosophy-section h2 {
+           font-family: 'InkLiquid';
+            color: #fff; /* 라이트 블루 포인트 컬러 */
+            font-size: 40px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 0 0 50px 0;
+            letter-spacing: -1px;
+            word-break: keep-all;
+            /* 제목 나타나기 효과 */
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .philosophy-text p {
+            color: #eeeeee;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0 0 20px 0;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            /* 본문 나타나기 효과 (기본적으로 숨김) */
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .philosophy-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 본문 문단별로 시차를 두고 나타나게 설정 (0.3초, 0.6초, 0.9초) */
+        .philosophy-text p:nth-child(1) { animation-delay: 0.3s; }
+        .philosophy-text p:nth-child(2) { animation-delay: 0.6s; }
+        .philosophy-text p:nth-child(3) { animation-delay: 0.9s; }
+
+
+        /* --- [심플 카톡 배너 영역 (세로 정렬 및 우측 배경 이미지 적용)] --- */
+        .kakao-banner-section {
+            background: #3a1d1d;
+            padding: 40px 40px 40px;
+        }
+
+        .kakao-banner {
+   
+            
+            border-radius: 16px;
+            padding: 45px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .kakao-banner span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2dc01;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 심플한 카카오톡 링크 버튼 (화이트 버튼) */
+        .simple-kakao-btn {
+            position: relative;
+            z-index: 2;
+            background-color: #f2dc01;
+            color: #3a1d1d;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 2em;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .simple-kakao-btn:hover {
+            background-color: #fffc00;
+            transform: translateY(2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .simple-kakao-btn img {height: 40px;}
+
+        /* 상담시간 텍스트 스타일 추가 */
+        .consult-time {
+            position: relative;
+            z-index: 2;
+            font-size: 15px;
+            font-weight: 400;
+            color: #f2dc01; 
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+
+
+        /* --- [아이콘 적용형] 작업 진행 순서 영역 --- */
+        .process-section {
+            background: #eaeaea;
+            padding: 5em 40px 80px 40px;
+        }
+
+        .process-title {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: #111111;
+            margin: 0 0 35px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2x2 그리드 배열 */
+            gap: 20px;
+        }
+
+        .process-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 35px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        /* SVG 아이콘 박스 */
+        .card-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f7ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon-box svg {
+            width: 24px;
+            height: 24px;
+            stroke: #0078FF;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 카드 텍스트 영역 */
+        .process-text h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: #111111;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .process-text p {
+            font-size: 14px;
+            color: #666666;
+            margin: 0;
+            line-height: 1.6;
+            letter-spacing: -0.3px;
+            font-weight: 400;
+        }
+
+        .process-text p + p {
+            margin-top: 4px;
+        }
+
+        /* 카드 하단 버튼 영역 */
+        .card-bottom {
+            margin-top: 25px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .process-btn {
+            background-color: #f8f9fa;
+            color: #333333;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+        }
+
+        .process-btn:hover {
+            background-color: #0078FF;
+            color: #ffffff;
+            border-color: #0078FF;
+        }
+
+
+        /* --- 상단 파란색 배너 영역 --- */
+        .top-banner {
+            background-color: #0078FF;
+            color: #ffffff;
+            text-align: center;
+            padding: 260px 20px 60px 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-banner .badge {
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            padding: 5px 20px;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 0px;
+            letter-spacing: 1px;
+        }
+
+        .top-banner h1 {
+            font-size: 60px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+
+        .top-banner p {
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .top-banner a, .bottom-banner a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .top-banner a:hover, .bottom-banner a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* --- 중간 이미지 영역 --- */
+        .content-section {
+            width: 100%;
+            text-align: center;
+            background-color: #ffffff;
+            padding-top: 0px;
+            padding-bottom: 60px;
+        }
+
+        .content-section img {
+            max-width: 1000px; 
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+
+        /* --- 하단 배경 이미지 배너 영역 --- */
+        .bottom-banner {
+            position: relative;
+            background-image: url('https://github.com/puffy0007-ai/video/blob/main/395945_bottoml.jpg?raw=true');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            text-align: center;
+            height: 500px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        .bottom-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+        }
+
+        .bottom-banner a {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bottom-banner h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+
+        /* -------------------------------------------
+            팝업(모달) 스타일 
+            ------------------------------------------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #fff;
+            padding: 50px 40px;
+            border: 2px solid #111;
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            position: relative;
+            color: #333;
+            text-align: left;
+        }
+        
+        .iframe-modal-content {
+            background: #fff;
+            padding: 0;
+            border: 2px solid #111;
+            width: 95%;
+            max-width: 850px;
+            height: 85vh;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .close-btn:hover { 
+            color: #111; 
+        }
+        
+        .modal-content h3 { margin: 0 0 10px 0; font-size: 18px; letter-spacing: 1px; color: #111; }
+        .modal-content p { font-size: 13px; color: #666; margin-bottom: 30px; word-break: keep-all; line-height: 1.5; }
+        
+        .modal-form { display: flex; flex-direction: column; gap: 15px; } 
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 12px; font-weight: bold; color: #111; }
+        .form-group select, .form-group input {
+            padding: 10px 12px; border: 1px solid #ccc; font-family: inherit; font-size: 13px; outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group select:focus, .form-group input:focus { border-color: #111; }
+        
+        .submit-btn {
+            margin-top: 10px; padding: 15px; background: #111; color: #fff; border: none; 
+            font-weight: bold; letter-spacing: 1px; cursor: pointer; transition: background 0.3s;
+        }
+        .submit-btn:hover { background: #444; }
+
+        /* 반응형 처리 */
+        @media (max-width: 768px) {
+            .brand-philosophy-section h2 {
+                font-size: 28px;
+            }
+            .philosophy-text p {
+                font-size: 14px;
+            }
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            .kakao-banner {
+                background-position: right -20px center; /* 모바일에서는 이미지를 살짝 더 바깥으로 뺌 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 화면 전체 넓이를 1000px로 묶어주는 래퍼 -->
+    <div class="page-wrapper">
+
+        <!-- 0. 브랜드 소개/철학 영역 (어두운 배경 + 스르륵 애니메이션 효과) -->
+        <div class="brand-philosophy-section">
+            <h2>남들과 다른 디자인 미우 디자인입니다</h2>
+            <div class="philosophy-text">
+                <p>평범한걸 좋아하지도 않고 만들줄도 몰라요..<br>그저 내 손이 내 머리가 이끄는대로 디자인합니다.</p>
+                <p>수정에 수정을 거듭해서 하나를 완성합니다.<br>하지만 아직도 많이 부족한 단계...</p>
+                <p>'남들이 하는대로 뚝딱뚝딱 찍어내기만하면 얼마나 쉬울까.. '<br>생각도 해보았습니다 그러나<br>저는 내 손과 머리를 따르기로 했습니다.</p>
+            </div>
+        </div>
+
+        <!-- 1. 심플한 카카오톡 상담 배너 영역 -->
+        <div class="kakao-banner-section">
+            <div class="kakao-banner">
+                <!-- 💬 말풍선 아이콘 완벽히 제거됨 -->
+                <span>1:1 카카오톡 문의하기</span>
+                
+                <!-- 원하는 카카오톡 링크 주소를 href에 넣어주세요 -->
+                <a href="https://pf.kakao.com/_xaecxbn/chat" class="simple-kakao-btn" target="_blank">
+                    <img src="https://github.com/puffy0007-ai/video/blob/main/kakao.png?raw=true">카카오톡 상담하기 ➔
+                </a>
+                
+                <!-- 추가 요청하신 상담시간 텍스트 공간 -->
+                <p class="consult-time">언제든지 카톡 남기시면 답변 드립니다</p>
+            </div>
+        </div>
+
+        <!-- 2. 작업 진행 순서 영역 (아이콘 카드형) -->
+        <div class="process-section">
+            <h2 class="process-title">작업 진행 순서</h2>
+            
+            <div class="process-grid">
+                <!-- 카드 1 -->
+                <div class="process-card">
+                    <div>
+                        <div class="process-text">
+                            <h3>디자인 선택 및 결제</h3>
+                            <p>기본 커스텀인경우 디자인 선택 후 결제완료합니다.</p>
+                            <p>주문제작이 필요한경우 사전 상담문의바랍니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 2 -->
+                <div class="process-card">
+                    <div>
+                        <div class="process-text">
+                            <h3>주문서 접수하기</h3>
+                            <p>홈페이지에 접속하신 후  주문서를 작성해 주세요.</p>
+                            <p>필수입력사항은 빠짐없이 입력해주세요.</p>
+                        </div>
+                    </div>
+                    <div class="card-bottom">
+                        <a onclick="openIframeModal()" class="process-btn">주문서 작성하러가기 →</a>
+                    </div>
+                </div>
+
+                <!-- 카드 3 -->
+                <div class="process-card">
+                    <div>
+                        
+                        <div class="process-text">
+                            <h3>레이아웃 세팅 진행</h3>
+                            <p>주문서를 바탕으로 디자이너가 맞춤 세팅을 시작합니다.</p>
+                            <p>요청 사항에 따라 작업 소요 기간이 변동될 수 있습니다.</p>
+                            <p>(기본:1일, 주문제작시:협의)</p>
+                        </div>
+                    </div>
+                    <div class="card-bottom">
+                        <!-- 클릭 시 아래 이미지 영역으로 스르륵 이동 -->
+                        <a href="#detail-image-section" class="process-btn">기본세팅 범위 안내 →</a>
+                    </div>
+                </div>
+
+                <!-- 카드 4 -->
+                <div class="process-card">
+                    <div>
+                        <div class="process-text">
+                            <h3>확인 및 완료</h3>
+                            <p>세팅 완료 시 완성된 사이트 확인 후 보강하거나 종료합니다.</p>
+                            <p>메뉴얼 신청시 이메일로 전송해드립니다.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 상단 파란색 배너 영역 -->
+        <div class="top-banner">
+            <div class="badge">vol. 6</div>
+                <h1>OILLILLI</h1>
+            <p>커스터마이징 리스트</p>
+        </div>
+
+        <!-- 4. 중간 상세 이미지 영역 (앵커 이동 목적지) -->
+        <div class="content-section" id="detail-image-section">
+            <img src="https://github.com/puffy0007-ai/video/blob/main/395945_detail.jpg?raw=true" alt="상세페이지 메인 컨텐츠">
+        </div>
+
+        <!-- 5. 하단 배경 이미지 배너 영역 -->
+        <div class="bottom-banner">
+            <a href="https://mimingshop.cafe24.com" target="_blank">
+                <h2>@미우디자인</h2>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- -------------------------------------------
+         1. 매뉴얼 신청 팝업 
+         ------------------------------------------- -->
+    <div id="manualModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeManualModal()">&times;</span>
+            <h3>매뉴얼 신청</h3>
+            <p>구매하신 디자인과 이메일 주소를 남겨주세요.</p>
+            
+            <form id="manual-form" action="https://formspree.io/f/xyegjnlr" method="POST" class="modal-form">
+                <div class="form-group">
+                    <label>메뉴얼 선택</label>
+                    <select name="디자인_카테고리" required>
+                        <option value="">구매하신 디자인을 선택해주세요</option>
+                        <option value="오일릴리">오일릴리(VOL.06)</option>
+                        <option value="쁘띠꼬똥">쁘띠꼬똥(준비중)</option>
+                        <option value="라벨르">라벨르(준비중)</option>
+                        <option value="루나">루나(준비중)</option>
+                        <option value="퓨어">퓨어(준비중)</option>
+                        <option value="미구">미구(준비중)</option>
+                        <option value="핑크리">핑크리(준비중)</option>
+                        <option value="미우">미우(준비중)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>신청자 이메일</label>
+                    <input type="email" name="메뉴얼_신청_이메일" placeholder="매뉴얼을 받으실 이메일 주소" required>
+                </div>
+                <button type="submit" class="submit-btn">매뉴얼 신청하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------
+         2. 카페24 게시판 연동 팝업 (iframe 적용)
+         ------------------------------------------- -->
+    <div id="iframeModal" class="modal-overlay">
+        <div class="iframe-modal-content">
+            <span class="close-btn" onclick="closeIframeModal()">&times;</span>
+            <iframe src="/board/product/write.html?board_no=6" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- 스크립트 영역 -->
+    <script>
+      // 매뉴얼 팝업 열기/닫기
+      function openManualModal() {
+          document.getElementById('manualModal').style.display = 'flex';
+      }
+      function closeManualModal() {
+          document.getElementById('manualModal').style.display = 'none';
+      }
+
+      // 게시판(iframe) 팝업 열기/닫기
+      function openIframeModal() {
+          document.getElementById('iframeModal').style.display = 'flex';
+          var iframe = document.querySelector('#iframeModal iframe');
+          if (iframe) {
+              iframe.onload = function() {
+                  try {
+                      var path = iframe.contentWindow.location.pathname;
+                      if (path.indexOf('/board/product/write.html') === -1) {
+                          closeIframeModal();
+                      }
+                  } catch (e) {}
+              };
+          }
+      }
+      
+      function closeIframeModal() {
+          document.getElementById('iframeModal').style.display = 'none';
+          setTimeout(function() {
+              var iframe = document.querySelector('#iframeModal iframe');
+              if (iframe) {
+                  iframe.src = iframe.src;
+              }
+          }, 300);
+      }
+
+      // 폼 비동기 전송 처리 (매뉴얼 신청)
+      const manualForm = document.getElementById("manual-form");
+      if (manualForm) {
+          manualForm.addEventListener("submit", async function(event) {
+              event.preventDefault(); 
+              const formData = new FormData(manualForm);
+              try {
+                  const response = await fetch(manualForm.action, {
+                      method: manualForm.method,
+                      body: formData,
+                      headers: { 'Accept': 'application/json' }
+                  });
+                  if (response.ok) {
+                      alert("매뉴얼 신청이 성공적으로 완료되었습니다.\n확인 후 기재해주신 이메일로 회신해 드리겠습니다.");
+                      manualForm.reset(); 
+                      closeManualModal(); 
+                  } else {
+                      alert("오류가 발생했습니다. 다시 시도해 주세요.");
+                  }
+              } catch (error) {
+                  alert("네트워크 통신 오류가 발생했습니다.");
+              }
+          });
+      }
+    </script>
+</body>
+</html>
